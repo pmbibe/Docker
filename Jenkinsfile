@@ -1,11 +1,11 @@
 pipeline {
     agent {
-        docker { image 'node:7-alpine' }
+        docker { image 'centos7' }
     }
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'whoami'
             }
         }
     }
