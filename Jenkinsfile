@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'php7' }
+        docker { image 'php:7.2-cli' }
     }
     stages {
         stage('Test') {
