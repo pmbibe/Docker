@@ -5,7 +5,9 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'pwd'
+                withDockerContainer('centos') {
+                    sh "ls"
+                }
             }
         }
     }
