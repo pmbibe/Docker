@@ -1,11 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'php:5.6-cli' }
-    }
+    agent { dockerfile true }
     stages {
         stage('Test') {
             steps {
-                 sh 'php --version && pwd'
+                sh 'node --version'
+                sh 'svn --version'
             }
         }
     }
