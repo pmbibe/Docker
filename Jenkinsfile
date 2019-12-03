@@ -1,13 +1,11 @@
 pipeline {
     agent {
-        docker { image 'centos' }
+        docker { image 'node:php7' }
     }
     stages {
         stage('Test') {
             steps {
-                withDockerContainer('centos') {
-                    sh "ls"
-                }
+                 sh 'node --version'
             }
         }
     }
