@@ -7,7 +7,7 @@ pipeline {
       steps {
         echo "--------------------Prepare Stage---------------------"
         sh "rm -rf *"
-        sh "whoami"
+        sh "php --version"
         sh "git clone https://github.com/pmbibe/Demo_jenkins"
         sh "chmod +x Demo_jenkins"
       }
