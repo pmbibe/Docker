@@ -1,7 +1,7 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Test') {
+        stage('Prepare') {
             steps {
                 sh 'php --version'
                 sh 'whoami'
