@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'php --version'
                 sh 'whoami'
-                sh 'sudo git clone https://github.com/pmbibe/Docker'
+                sh 'git clone https://github.com/pmbibe/Docker'
             }
         }
     }
