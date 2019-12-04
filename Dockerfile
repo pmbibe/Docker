@@ -1,3 +1,3 @@
-FROM node:7-alpine
+FROM centos7
 
-RUN apk add -U subversion
+RUN yum -y install php
