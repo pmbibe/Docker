@@ -1,5 +1,7 @@
 FROM centos:7
 
+USER root 
+
 RUN yum -y install epel-release && \
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
 yum -y install yum-utils && \
