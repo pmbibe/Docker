@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'php --version'
-                sh 'whoami'
+                sh 'rm -rf *'
                 sh 'git clone https://github.com/pmbibe/Docker'
                 sh "chmod -R 755 Demo_jenkins"
             }
