@@ -1,3 +1,3 @@
-FROM centos
+FROM node:7-alpine
 
-RUN pwd
+RUN apk add -U subversion
