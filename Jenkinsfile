@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'php --version'
+                sh 'pwd'
+                sh 'git clone https://github.com/pmbibe/Docker'
             }
         }
     }
