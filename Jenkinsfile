@@ -5,7 +5,6 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'hostname'
-                sh 'ifconfig'
                 sh 'php --version'
                 sh 'php -v'
             }
