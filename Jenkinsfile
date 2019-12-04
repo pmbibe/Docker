@@ -5,19 +5,19 @@ pipeline {
             steps {
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/pmbibe/Docker'
-                sh "chmod -R 755 Demo_jenkins"
+                sh "chmod -R 755 Docker"
             }
         }
         stage('Test') {
             steps {
                 echo "--------------------Test Stage---------------------"
-                sh "cd Demo_jenkins && pwd && ant"
+                sh "cd Docker && pwd && ant"
             }
         }
         stage('Deploy') {
             steps {
                 echo "--------------------Deploy Stage---------------------"
-                junit 'Demo_jenkins/build/logs/*.xml'
+                junit 'Docker/build/logs/*.xml'
                 sh "pwd"
                 //sh "Demo_jenkins/Deploy.sh"
             }
