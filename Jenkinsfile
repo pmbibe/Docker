@@ -4,8 +4,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'php --version'
-                sh 'whoami'
-                sh 'git clone https://github.com/pmbibe/Docker'
+                sh 'su -'
+                sh 'sudo git clone https://github.com/pmbibe/Docker'
             }
         }
     }
