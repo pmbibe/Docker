@@ -12,4 +12,5 @@ yum -y install php72-php-fpm php72-php-gd php72-php-json php72-php-mbstring php7
 yum -y install git && \
 yum -y install php-xml && \
 yum -y install php-mbstring && \
-yum -y install ant
+yum -y install ant && \
+yum -y install php-xdebug
