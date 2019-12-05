@@ -22,7 +22,7 @@ pipeline {
        
             steps {
                 echo "--------------------Deploy Stage---------------------"
-                junit 'build/logs/*.xml'
+                //junit 'build/logs/*.xml'
                 //sh "./Deploy.sh"
                 //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
                 //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
