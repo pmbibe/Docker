@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
+                sh "hostname"
                 //sh 'rm -rf *'
                 //sh 'git clone https://github.com/pmbibe/Docker'
                 //sh "chmod -R 755 Docker"
