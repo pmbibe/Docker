@@ -22,9 +22,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "--------------------Deploy Stage---------------------"
-                junit 'Docker/build/logs/*.xml'
+                junit 'Jenkins_Dockerfile/build/logs/*.xml'
                 sh "pwd"
-                sh "Docker/Deploy.sh"
+                sh "Jenkins_Dockerfile/Deploy.sh"
             }
         }
     }
