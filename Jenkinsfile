@@ -1,20 +1,21 @@
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'babibe2211/jenkin_php'
+        }
+    }
     stages {
-        stage('Build') {
-            agent {docker  image 'babibe2211/jenkin_php'}
+        stage('Test') {
             steps {
-                checkout scm
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/pmbibe/Docker'
                 sh "chmod -R 755 Docker"
                 echo "--------------------Test Stage---------------------"
                 sh "cd Docker && pwd && ant"
+                echo "--------------------Deploy Stage---------------------"
                 junit 'Docker/build/logs/*.xml'
                 sh "pwd"
-                sh "ls"
-                sh "exit"
-                sh "ls"
+                sh "Docker/Deploy.sh"
             }
         }
     }
