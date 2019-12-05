@@ -18,15 +18,33 @@ pipeline {
                 sh "ant"
             }
         }
-        stage('Deploy') {
-       
+        stage('Deploy to master') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo "--------------------Deploy Stage---------------------"
                 //junit 'build/logs/*.xml'
                 //sh "./Deploy.sh"
                 //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
                 //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
-                
+                echo "${BRANCH_NAME}"
+                sh "pwd"
+                sh "chmod +x Deploy.sh && ./Deploy.sh"
+            }
+        }
+        stage('Deploy to test') {
+            when {
+                branch 'test'
+            }
+            steps {
+                echo "--------------------Deploy Stage---------------------"
+                echo "${BRANCH_NAME}"
+                //junit 'build/logs/*.xml'
+                //sh "./Deploy.sh"
+                //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
+                //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
+
                 sh "pwd"
                 sh "chmod +x Deploy.sh && ./Deploy.sh"
             }
