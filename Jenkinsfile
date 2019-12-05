@@ -31,6 +31,7 @@ pipeline {
                 echo "${BRANCH_NAME}"
                 sh "pwd"
                 sh "chmod +x Deploy.sh && ./Deploy.sh"
+                junit 'build/logs/*.xml'
             }
         }
         stage('Deploy to test') {
@@ -40,11 +41,9 @@ pipeline {
             steps {
                 echo "--------------------Deploy Stage---------------------"
                 echo "${BRANCH_NAME}"
-                junit 'build/logs/*.xml'
                 //sh "./Deploy.sh"
                 //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
                 //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
-
                 sh "pwd"
                 sh "chmod -R 775 *&& ./Deploy.sh"
             }
