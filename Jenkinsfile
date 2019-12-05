@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo "--------------------Deploy Stage---------------------"
                 junit 'build/logs/*.xml'
-                //sh "Jenkins_Dockerfile/Deploy.sh"
+                sh "./Deploy.sh"
             }
         }
     }
