@@ -16,15 +16,16 @@ pipeline {
         stage('Test') {
             steps {
                 echo "--------------------Test Stage---------------------"
-                sh "cd Docker && pwd && ant"
+                sh "ls"
+                //sh "cd Docker && pwd && ant"
             }
         }
         stage('Deploy') {
             steps {
                 echo "--------------------Deploy Stage---------------------"
-                junit 'Jenkins_Dockerfile/build/logs/*.xml'
-                sh "pwd"
-                sh "Jenkins_Dockerfile/Deploy.sh"
+                //junit 'Jenkins_Dockerfile/build/logs/*.xml'
+                //sh "pwd"
+                //sh "Jenkins_Dockerfile/Deploy.sh"
             }
         }
     }
