@@ -1,5 +1,8 @@
 pipeline {
-    agent { dockerfile true }
+     
+    agent {
+        docker { image 'babibe2211/jenkin_php' }
+    }
     stages {
         stage('Prepare') {
             steps {
