@@ -28,7 +28,7 @@ pipeline {
                 //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
                 
                 sh "pwd"
-                sh "./Deploy.sh"
+                sh "chmod +x Deploy.sh && ./Deploy.sh"
             }
         }
     }
