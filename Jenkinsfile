@@ -1,13 +1,11 @@
 pipeline {
-     
-    agent {
-        any
-    }
+
+    agent any
     stages {
         stage('Prepare') {
             agent {
-               docker { image 'babibe2211/jenkin_php' }
-            } 
+               docker  image 'babibe2211/jenkin_php' 
+            }
             steps {
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/pmbibe/Docker'
