@@ -15,7 +15,9 @@ pipeline {
                 echo "--------------------Deploy Stage---------------------"
                 junit 'Docker/build/logs/*.xml'
                 sh "pwd"
-                sh "Docker/Deploy.sh"
+                sh "ls"
+                sh "exit"
+                sh "ls"
             }
         }
     }
