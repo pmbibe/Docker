@@ -7,9 +7,9 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                sh 'rm -rf *'
-                sh 'git clone https://github.com/pmbibe/Docker'
-                sh "chmod -R 755 Docker"
+                //sh 'rm -rf *'
+                //sh 'git clone https://github.com/pmbibe/Docker'
+                //sh "chmod -R 755 Docker"
             }
         }
         stage('Test') {
