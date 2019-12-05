@@ -16,6 +16,7 @@ pipeline {
                 echo "--------------------Test Stage---------------------"
                 sh "chmod -R 775 *"
                 sh "ant"
+                junit 'build/logs/*.xml'
             }
         }
         stage('Deploy to master') {
@@ -31,7 +32,6 @@ pipeline {
                 echo "${BRANCH_NAME}"
                 sh "pwd"
                 sh "chmod +x Deploy.sh && ./Deploy.sh"
-                junit 'build/logs/*.xml'
             }
         }
         stage('Deploy to test') {
