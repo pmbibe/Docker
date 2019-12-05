@@ -16,6 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "--------------------Test Stage---------------------"
+                sh "chmod +x *"
                 sh "ant"
             }
         }
