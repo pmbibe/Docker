@@ -133,6 +133,7 @@
         <exec executable="${basedir}/build/tools/phpunit.phar" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
             <arg path="${basedir}/build/phpunit.xml"/>
+            <arg value="--coverage-text"/>
         </exec>
     </target>
 
