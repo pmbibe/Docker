@@ -38,6 +38,7 @@ node('master') {
             {
             echo "OK"
             }
+     }
 
 }
 
