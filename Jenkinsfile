@@ -33,10 +33,12 @@ node('master') {
      }
      stage('Rollback') {
         env.ROLLBACK = input(message: 'Do you want rollback to previous version ?', ok: 'Yes',
-                        parameters: [booleanParam(defaultValue: true,
-                        description: '',name: 'Yes?')])
-        echo "$ROLLBACK"
-     }
+                        parameters: [booleanParam(defaultValue: true, description: '',name: 'Yes?')])
+        if (ROLLBACK == "true")
+            {
+            echo "OK"
+            }
+
 }
 
 
