@@ -1,26 +1,27 @@
-pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Prepare') {
-            steps {
-                sh 'rm -rf *'
-                sh 'git clone https://github.com/pmbibe/Docker'
-                sh "chmod -R 755 Docker"
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "--------------------Test Stage---------------------"
-                sh "cd Docker && pwd && ant"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo "--------------------Deploy Stage---------------------"
-                junit 'Docker/build/logs/*.xml'
-                sh "pwd"
-                sh "Docker/Deploy.sh"
-            }
+node('master') {
+     stage('Hello') {
+               checkout([$class: 'GitSCM', branches: [[name: '**']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/pmbibe/Two_Branches'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'pmbibe', url: 'https://github.com/pmbibe/Two_Branches']]])
+     }
+    stage('Build and Test code') {
+        echo "--------------------Test Stage---------------------"
+        withDockerContainer('babibe2211/jenkin_php') {
+        sh "hostname"
+        sh 'rm -rf *'
+        sh 'git clone https://github.com/pmbibe/Docker'
+        sh "chmod -R 775 *"
+        sh "cd Docker && ant"
         }
     }
+    env.LIST_VERSION_AVAILABLE = sh ( script: """
+                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt
+                  """,
+                  returnStdout: true )
+    stage('Choice Version') {
+        env.RELEASE_VERSION = input message: 'User input required', ok: 'Release!',
+                              parameters: [choice(name: 'RELEASE_VERSION', choices: "$LIST_VERSION_AVAILABLE", description: 'What version number do you want to release to Production environment?')]
+    }
+
+     stage('Deliver for development') {
+        echo env.BRANCH_NAME
+     }
 }
