@@ -24,7 +24,11 @@ node('master') {
      stage('Deliver for development') {
         if (env.BRANCH_NAME == "master")
             {
-            echo "OK"
+            echo "Deploying to Production"
+            }
+        if (env.BRANCH_NAME == "slave")
+            {
+            echo "Deploying to Test"
             }
      }
 }
