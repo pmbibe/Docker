@@ -36,12 +36,8 @@ node('master') {
                         parameters: [booleanParam(defaultValue: true, description: '',name: 'Yes?')])
         if (ROLLBACK == "true")
             {
-            sh "hostname"
+            sh 'hostname'
             }
      }
 
 }
-
-
-
-
