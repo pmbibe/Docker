@@ -22,6 +22,13 @@ node('master') {
     }
 
      stage('Deliver for development') {
-        echo env.BRANCH_NAME
+        if (env.BRANCH_NAME == "master")
+            {
+            echo "OK"
+            }
      }
 }
+
+
+
+
