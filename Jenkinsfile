@@ -34,7 +34,7 @@ node('master') {
      stage('Rollback') {
         env.ROLLBACK = input(message: 'Do you want rollback to previous version ?', ok: 'Yes',
                         parameters: [booleanParam(defaultValue: true, description: '',name: 'Yes?')])
-        sh 'hostname'
+        sh label: '', script: 'sh'
         if (ROLLBACK == "true")
             {
             sh ( script: """
