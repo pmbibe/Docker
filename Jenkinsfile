@@ -36,7 +36,7 @@ node('master') {
                         parameters: [booleanParam(defaultValue: true, description: '',name: 'Yes?')])
         if (ROLLBACK == "true")
             {
-            echo "OK"
+            sh "rocketeer"
             }
      }
 
