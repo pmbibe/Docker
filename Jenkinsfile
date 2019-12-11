@@ -13,7 +13,7 @@ node('master') {
         }
     }
     env.LIST_VERSION_AVAILABLE = sh ( script: """
-                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt
+                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt && cat hello.txt
                   """,
                   returnStdout: true )
     stage('Choice Version') {
@@ -26,9 +26,13 @@ node('master') {
             {
             echo "Deploying to Production"
             }
-        if (env.BRANCH_NAME == "slave")
+        if (env.BRANCH_NAME == "test")
             {
             echo "Deploying to Test"
             }
      }
 }
+
+
+
+
