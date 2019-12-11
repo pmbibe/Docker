@@ -38,7 +38,7 @@ node('master') {
         if (ROLLBACK == "true")
             {
             sh """
-               rocketeer
+               hostname
                """
             }
      }
