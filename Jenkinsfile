@@ -22,6 +22,10 @@ node('master') {
     }
 
      stage('Deliver for development') {
+        sh ( script: """
+                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt && cat hello.txt
+                  """,
+                  returnStdout: true )
         if (env.BRANCH_NAME == "master")
             {
             echo "Deploying to Production"
@@ -32,9 +36,12 @@ node('master') {
             }
      }
      stage('Rollback') {
+        sh ( script: """
+                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt && cat hello.txt
+                  """,
+                  returnStdout: true )
         env.ROLLBACK = input(message: 'Do you want rollback to previous version ?', ok: 'Yes',
                         parameters: [booleanParam(defaultValue: true, description: '',name: 'Yes?')])
-        sh label: '', script: 'sh'
         if (ROLLBACK == "true")
             {
             sh ( script: """
