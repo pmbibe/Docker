@@ -1,52 +1,34 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Prepare') {
-        agent {
-            docker {
-                image 'babibe2211/jenkin_php'
-            }
-        }
-            steps {
-                sh "hostname"
-                //sh 'rm -rf *'
-                //sh 'git clone https://github.com/pmbibe/Docker'
-                //sh "chmod -R 755 Docker"
-                echo "--------------------Test Stage---------------------"
-                sh "chmod -R 775 *"
-                sh "ant"
-                junit 'build/logs/*.xml'
-            }
-        }
-        stage('Deploy to master') {
-            when {
-                branch 'master'
-            }
-            steps {
-                echo "--------------------Deploy Stage---------------------"
-                //junit 'build/logs/*.xml'
-                //sh "./Deploy.sh"
-                //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
-                //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
-                echo "${BRANCH_NAME}"
-                sh "pwd"
-                sh "chmod +x Deploy.sh && ./Deploy.sh"
-            }
-        }
-        stage('Deploy to test') {
-            when {
-                branch 'test'
-            }
-            steps {
-                echo "--------------------Deploy Stage---------------------"
-                echo "${BRANCH_NAME}"
-                //sh "./Deploy.sh"
-                //sh "git clone https://github.com/pmbibe/Ansible_Telegraf"
-                //sh "cd Ansible_Telegraf && ansible-playbook serverlist.yml"
-                sh "pwd"
-                sh "chmod -R 775 *&& ./Deploy.sh"
-            }
+node('master') {
+     stage('Hello') {
+               checkout([$class: 'GitSCM', branches: [[name: '**']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/pmbibe/Two_Branches'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'pmbibe', url: 'https://github.com/pmbibe/Two_Branches']]])
+     }
+    stage('Build and Test code') {
+        echo "--------------------Test Stage---------------------"
+        withDockerContainer('babibe2211/jenkin_php') {
+        sh "hostname"
+        sh 'rm -rf *'
+        sh 'git clone https://github.com/pmbibe/Docker'
+        sh "chmod -R 775 *"
+        sh "cd Docker && ant"
         }
     }
+    env.LIST_VERSION_AVAILABLE = sh ( script: """
+                  ssh root@192.168.141.203 ls /home/www/HelloWorld/releases > hello.txt
+                  """,
+                  returnStdout: true )
+    stage('Choice Version') {
+        env.RELEASE_VERSION = input message: 'User input required', ok: 'Release!',
+                              parameters: [choice(name: 'RELEASE_VERSION', choices: "$LIST_VERSION_AVAILABLE", description: 'What version number do you want to release to Production environment?')]
+    }
+
+     stage('Deliver for development') {
+        if (env.BRANCH_NAME == "master")
+            {
+            echo "Deploying to Production"
+            }
+        if (env.BRANCH_NAME == "slave")
+            {
+            echo "Deploying to Test"
+            }
+     }
 }
