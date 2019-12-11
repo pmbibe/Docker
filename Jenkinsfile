@@ -31,6 +31,12 @@ node('master') {
             echo "Deploying to Test"
             }
      }
+     stage('Rollback') {
+        env.ROLLBACK = input(message: 'Do you want rollback to previous version ?', ok: 'Yes',
+                        parameters: [booleanParam(defaultValue: true,
+                        description: '',name: 'Yes?')])
+        echo "$ROLLBACK"
+     }
 }
 
 
