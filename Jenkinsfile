@@ -3,7 +3,7 @@ node('master') {
         echo "--------------------Test Stage---------------------"
         withDockerContainer('babibe2211/jenkin_php') {
         sh 'rm -rf *'
-        sh 'git clone https://github.com/sebastianbergmann/money'
+        sh 'git clone https://github.com/pmbibe/TestRocketeer'
         sh "chmod -R 775 *"
         sh "cd money && ant"
         }
@@ -50,6 +50,4 @@ node('master') {
      dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'money/build/logs/pmd-cpd.xml', unHealthy: ''
      pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'money/build/logs/pmd.xml', unHealthy: ''
      plot csvFileName: 'plot-35267617-304b-44d8-9f2e-dbd479a59c89.csv', csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'money/build/logs/phploc.csv', inclusionFlag: 'OFF', url: '']], group: 'phploc', numBuilds: '50', style: 'line', title: 'Lines of Code', yaxis: 'Lines of Code'
-     
-
 }
