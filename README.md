@@ -1,1 +1,1 @@
-# Demo_jenkins
+# Jenkins (BlueOcean with Nginx as Proxy)
