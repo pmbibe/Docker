@@ -1,0 +1,12 @@
+def builders = [:]
+builders["x86"] = {
+  node {
+    ... "-s arch=x86"
+    }
+}
+builders["x86_64"] = {
+  node {
+    ... "-s arch=x86_64"
+    }
+}
+parallel builders
